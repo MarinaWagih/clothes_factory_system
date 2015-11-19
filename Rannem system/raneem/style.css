@@ -1,0 +1,122 @@
+body{
+		background-color:RGB(18,50,65);
+		background-image:url(sparkles_9361.jpg) ;
+		/*background-repeat: no-repeat;*/ 
+		background-size: 100%;
+		width: 100%;
+         color: black;
+}
+
+h1{
+		width:100%;
+		color:#ffffff;	
+		background-color:RGB(222,64,98);
+		font-size:55px;
+		margin-left: 100px;
+		margin-top: -7px;
+
+}
+#label{
+		color: black;
+		font-size: 24px;
+		width:50% ;
+		height:55px;
+		text-align:right; ;
+}
+
+.Main_Op{
+	     align:"center" ;
+	     float: right;
+        margin-right: -85px;
+		margin-left:10px;
+		
+} 
+.OP{
+	     margin-left: 100px;
+         height: 40px;
+    	 width: 250px;
+         font-size:20px;
+         text-align:center;
+}
+.inpute_txet{
+		height:50px;
+		width:300px;
+		font-size: 24px;
+		text-align:right;
+	}
+.ok{
+		font-size: 24px;
+	    height: 50px;
+	    width: 70px;
+	}		  
+.Back{
+		font-size: 24px;
+	    height: 50px;
+	    width: 70px;
+	}		  
+#header{
+		color:#ffffff;	
+		background-color:RGB(222,64,98);
+		font-size:48px;
+		margin-top: 0px;
+		margin-left:0px;
+		margin-bottom: 20px;
+		border:RGB(222,64,98);
+		border-radius:20px;
+		height:80px;
+		width: 99%;
+}
+.Add{
+	    align:"center" ;
+       /*  margin-top: 60px;
+
+		border:thick inset #666;*/
+        width: 65%;
+        border-radius: 20px;
+		color:RGB(222,64,98);	
+        background-color:#fff;
+		padding-top:10px;
+		padding-bottom:20px;
+		display: block;
+        margin-right: 150px;
+}
+#title{
+	     font-size:20px;
+        text-align:right;
+		margin-left:-40px;
+
+	}
+
+.tableHeader
+{       color:#ffffff;	
+		background-color:RGB(222,64,98);
+		font-size:20px;
+		margin-top: 10px;
+		margin-left:0px;
+		margin-bottom: 20px;
+		border:RGB(222,64,98);
+		border-radius:5px;
+		width: 120;
+		
+}
+.NewRow
+{
+	    cursor: pointer;
+        color:RGB(222,64,98);	
+		background-color:#fff;
+		font-size:30px;
+		margin-right: 765px;
+		border:RGB(222,64,98);
+		border-radius:100px;
+		border: 2px solid;
+		width: 35px;
+		height:35px;
+}
+.tdRaw
+{
+        color:#000;	
+		font-size:20px;
+		border-radius:0px;
+		width: 120;
+
+}
