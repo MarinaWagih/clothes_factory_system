@@ -59,7 +59,7 @@ class ProductController extends Controller
     {
         $this->validate($request, ['name' => 'required']);
         $product =Product::create($request->all());
-        return redirect('product/' . $product->id);
+        return redirect()->action('ProductController@show' ,['id'=> $product->id]);
     }
 
     /**
@@ -107,7 +107,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($product) {
             $product->update($request->all());
-            return redirect('product/' . $product->id);
+            return redirect()->action('ProductController@show' ,['id'=> $product->id]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -122,7 +122,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-        return redirect('product');
+        return redirect()->action('ProductController@index');
     }
 
     /**

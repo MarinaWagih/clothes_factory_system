@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\Trader;
 use Illuminate\Http\Request;
 
@@ -64,7 +65,7 @@ class TraderController extends Controller
     {
         $this->validate($request, ['name' => 'required']);
         $trader =Trader::create($request->all());
-        return redirect('trader/' . $trader->id);
+        return redirect()->action('TraderController@show' ,['id'=> $trader->id]);
     }
 
     /**
@@ -113,7 +114,7 @@ class TraderController extends Controller
         $trader = Trader::find($id);
         if ($trader) {
             $trader->update($request->all());
-            return redirect('trader/' . $trader->id);
+            return redirect()->action('TraderController@show' ,['id'=> $trader->id]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -128,7 +129,7 @@ class TraderController extends Controller
     public function destroy($id)
     {
         Trader::destroy($id);
-        return redirect('trader');
+        return redirect()->action('TraderController@index');
     }
     /**
      * search by name or phone or address
@@ -139,18 +140,18 @@ class TraderController extends Controller
     {
         $name=$request->get('query');
         $type=$request->get('type');
-        $products = Product::where('type',$type)
-            ->where(function($query) use ($name){
+        $traders = Trader::where('type'.$type)->
+            where(function($query) use ($name){
                 $query->where('name', 'like', $name . "%")
                     ->orWhere('phone', 'like', '%' .$name . "%")
                     ->orWhere('address','like', '%' . $name . "%");
             })->paginate($this->pagination_No);
-        $result=$products->toArray();
+        $result=$traders->toArray();
         if($request->get('type')=='json')
         {
             return response()->json($result);
         }
-        return view('product.all')->with(['products' => $products]);
+        return view('trader.all')->with(['traders' => $traders]);
     }
     public function ajax_search(Request $request)
     {

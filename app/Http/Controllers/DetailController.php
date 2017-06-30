@@ -64,7 +64,7 @@ class DetailController extends Controller
         $this->validate($request, ['name' => 'required',
             'price' => 'required']);
         $detail =Detail::create($request->all());
-        return redirect('detail/' . $detail->id);
+        return redirect()->action('DetailController@show' ,['id'=> $detail->id]);
     }
 
     /**
@@ -117,7 +117,7 @@ class DetailController extends Controller
         $detail = Detail::find($id);
         if ($detail) {
             $detail->update($request->all());
-            return redirect('detail/' . $detail->id);
+            return redirect()->action('DetailController@show' ,['id'=> $detail->id]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -133,7 +133,7 @@ class DetailController extends Controller
     {
         //
         Detail::destroy($id);
-        return redirect('detail');
+        return redirect()->action('DetailController@index');
     }
     public function search(Request $request)
     {

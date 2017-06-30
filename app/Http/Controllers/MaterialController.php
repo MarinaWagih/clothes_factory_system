@@ -61,7 +61,7 @@ class MaterialController extends Controller
         $this->validate($request, ['name' => 'required',
             'price' => 'required']);
         $material =Material::create($request->all());
-        return redirect('material/' . $material->id);
+        return redirect()->action('MaterialController@show' , ['id'=>$material->id]);
     }
 
     /**
@@ -112,7 +112,7 @@ class MaterialController extends Controller
         $material = Material::find($id);
         if ($material) {
             $material->update($request->all());
-            return redirect('material/' . $material->id);
+            return redirect()->action('MaterialController@show' , ['id'=>$material->id]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -128,7 +128,7 @@ class MaterialController extends Controller
     {
         //
         Material::destroy($id);
-        return redirect('material');
+        return redirect()->action('MaterialController@index');
     }
     public function search(Request $request)
     {

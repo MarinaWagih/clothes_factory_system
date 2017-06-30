@@ -53,7 +53,7 @@ class DetailOrderController extends Controller
             'product_id' => 'required',
         ]);
         $order =DetailsOrder::create($request->all());
-        return redirect('detail_orders/' . $order->id);
+        return redirect()->action('DetailOrderController@show',['id'=> $order->id]);
     }
 
     /**
@@ -109,7 +109,7 @@ class DetailOrderController extends Controller
         if($order)
         {
             $order->update($request->all());
-            return redirect('detail_order/' . $order->id);
+            return redirect()->action('DetailOrderController@show',['id'=> $order->id]);
         }
         else{
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
@@ -127,6 +127,6 @@ class DetailOrderController extends Controller
     {
         //
         DetailsOrder::destroy($id);
-        return redirect('detail_order');
+        return redirect()->action('DetailOrderController@index');
     }
 }
