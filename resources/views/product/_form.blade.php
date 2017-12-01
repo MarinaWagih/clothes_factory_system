@@ -38,12 +38,10 @@
 </div>
 <div class="form-group">
     {!! Form::label('price',$cost_price) !!}
-    {{--{!! Form::text('price',null,['class'=>'form-control','placeholder'=>$write.' '.$price]) !!}--}}
     {!! Form::input('number','cost_price',null,['class'=>'form-control','id'=>'price']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('price',$selling_price) !!}
-    {{--{!! Form::text('price',null,['class'=>'form-control','placeholder'=>$write.' '.$price]) !!}--}}
     {!! Form::input('number','selling_price',null,['class'=>'form-control','id'=>'price']) !!}
 </div>
 <div class="form-group">
