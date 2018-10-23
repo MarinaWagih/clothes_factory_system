@@ -54,7 +54,7 @@
 
                      @endif
                 </tbody>
-            </table>
+            </table> -
             <div class="center" id="render">
 
                 {{--{!!$details->render()!!}--}}

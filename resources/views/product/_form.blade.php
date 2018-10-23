@@ -24,7 +24,6 @@
                     @elseif(str_contains($error,'not a valid'))
                         @lang('variables.not_a_valid')
                     @endif
-{{--                 {{$error}}--}}
                 </div>
 
             @endforeach
@@ -47,6 +46,21 @@
 <div class="form-group">
     {!! Form::label('quantity',$quantity) !!}
     {!! Form::input('number','quantity',null,['class'=>'form-control','id'=>'quantity']) !!}
+</div>
+<h4>@lang("variables.used_material")</h4>
+<div class="repeater">
+    <div data-repeater-list="materials">
+        @if(isset($product)&&count($product->productMaterials)>0)
+            @foreach($product->productMaterials as $material)
+                @include("product._productMaterialForm")
+            @endforeach
+        @else
+            @include("product._productMaterialForm")
+        @endif
+    </div>
+    <div>
+        <input data-repeater-create type="button" value="@lang("variables.add_materials")" class="btn btn-info add-material" />
+    </div>
 </div>
 <div class="form-group">
     {!! Form::submit($submitText,['class'=>'btn color']) !!}

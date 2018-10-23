@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Material;
+use App\ProductsOrder;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class MaterialController extends Controller
+class ProductOrderController extends Controller
 {
     /**
      * @var int
@@ -25,7 +25,7 @@ class MaterialController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //  $this->middleware('admin',['only'=>['destroy']]);
+//        $this->middleware('admin',['only'=>['destroy']]);
 
     }
     /**
@@ -35,9 +35,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $materials = Material::paginate($this->pagination_No);
-
-        return view('material.all')->with(['materials' => $materials]);
+      $product=  ProductsOrder::paginate($this->pagination_No);
+        return view('productOrder.all')->with(['productOrders' => $product]);
     }
 
     /**
@@ -47,7 +46,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        return view('material.create');
+        return view('productOrder.create');
     }
 
     /**
@@ -60,8 +59,9 @@ class MaterialController extends Controller
     {
         $this->validate($request, ['name' => 'required',
             'price' => 'required']);
-        $material =Material::create($request->all());
-        return redirect()->action('MaterialController@show' , ['id'=>$material->id]);
+        $detail =ProductsOrder::create($request->all());
+        return redirect()->action('DetailController@show' ,['id'=> $detail->id]);
+
     }
 
     /**
@@ -72,9 +72,10 @@ class MaterialController extends Controller
      */
     public function show($id)
     {
-        $material = Material::find($id);
-        if ($material) {
-            return view('material.show')->with(['material' => $material]);
+        //
+        $detail = ProductsOrder::find($id);
+        if ($detail) {
+            return view('detail.show')->with(['detail' => $detail]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -88,10 +89,9 @@ class MaterialController extends Controller
      */
     public function edit($id)
     {
-        //
-        $material = Material::find($id);
-        if ($material) {
-            return view('material.edit')->with(['material' => $material]);
+        $detail = ProductsOrder::find($id);
+        if ($detail) {
+            return view('detail.edit')->with(['detail' => $detail]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -106,13 +106,12 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $this->validate($request, ['name' => 'required',
             'price' => 'required']);
-        $material = Material::find($id);
-        if ($material) {
-            $material->update($request->all());
-            return redirect()->action('MaterialController@show' , ['id'=>$material->id]);
+        $detail = ProductsOrder::find($id);
+        if ($detail) {
+            $detail->update($request->all());
+            return redirect()->action('DetailController@show' ,['id'=> $detail->id]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -126,27 +125,21 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
-        Material::destroy($id);
-        return redirect()->action('MaterialController@index');
+        ProductsOrder::destroy($id);
+        return redirect()->action('DetailController@index');
     }
     public function search(Request $request)
     {
-        $materials = Material::where('name', 'like', $request->get('query') . "%")
+        $details = ProductsOrder::where('name', 'like', $request->get('query') . "%")
             ->orWhere('price', 'like', '%' . $request->get('query') . "%")
-//            ->get();
-            ->paginate($this->pagination_No);
-        $result=$materials->toArray();
-//        $result['render']=$materials->render();
+            ->get();
+//            ->paginate($this->pagination_No);
+        $result=$details->toArray();
+//        $result['render']=$details->render();
         if($request->get('type')=='json')
         {
             return response()->json($result);
         }
-        return view('material.all')->with(['materials' => $materials]);
-    }
-    public function searchByName(Request $request)
-    {
-        $materials = Material::where('name', 'like', $request->get('query') . "%")->get();
-        return response()->json($materials);
+        return view('detail.all')->with(['details' => $details]);
     }
 }

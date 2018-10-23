@@ -28,9 +28,9 @@ class Material extends Model
     {
         return $this->hasMany('App\MaterialsOrder');
     }
-    public function product()
+    public function productMaterials()
     {
-        return $this->hasMany('App\ProductMaterial')->with('quantity');
+        return $this->hasMany('App\ProductMaterial');
     }
 
 }

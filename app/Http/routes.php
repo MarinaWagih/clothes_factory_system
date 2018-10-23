@@ -32,6 +32,7 @@ Route::get('material_order/{id}/delete','MaterialOrderController@destroy');
 Route::resource('material_order','MaterialOrderController');
 //material Routes
 Route::get('material/search','MaterialController@search');
+Route::get('material/searchByName','MaterialController@searchByName');
 Route::get('material/{id}/delete','MaterialController@destroy');
 Route::resource('material','MaterialController');
 //product Routes
@@ -39,6 +40,11 @@ Route::get('product/search','ProductController@search');
 Route::get('product/ajax_search','ProductController@ajax_search');
 Route::get('product/{id}/delete','ProductController@destroy');
 Route::resource('product','ProductController');
+//trader Routes
+Route::get('trader/search','TraderController@search');
+Route::get('trader/ajax_search','TraderController@ajax_search');
+Route::get('trader/{id}/delete','TraderController@destroy');
+Route::resource('trader','TraderController');
 //trader Routes
 Route::get('trader/search','TraderController@search');
 Route::get('trader/ajax_search','TraderController@ajax_search');

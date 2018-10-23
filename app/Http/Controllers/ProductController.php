@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Material;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -46,7 +47,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $materials=Material::all()->lists('name','id');
+        return view('product.create',array("materials"=>$materials));
     }
 
     /**
@@ -59,6 +61,8 @@ class ProductController extends Controller
     {
         $this->validate($request, ['name' => 'required']);
         $product =Product::create($request->all());
+//        dd($request->get('materials'));
+        $product->productMaterials()->createMany($request->get('materials'));
         return redirect()->action('ProductController@show' ,['id'=> $product->id]);
     }
 
@@ -87,8 +91,12 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $materials=Material::all()->lists('name','id');
         if ($product) {
-            return view('product.edit')->with(['product' => $product]);
+            return view('product.edit')->with([
+                'product' => $product,
+                "materials"=>$materials
+            ]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);
         }
@@ -107,6 +115,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($product) {
             $product->update($request->all());
+            $product->productMaterials()->delete();
+            $product->productMaterials()->createMany($request->get('materials'));
             return redirect()->action('ProductController@show' ,['id'=> $product->id]);
         } else {
             return view('errors.Unauth')->with(['msg' => 'variables.not_found']);

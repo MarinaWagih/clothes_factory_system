@@ -9,15 +9,15 @@
             {{--<form class=" form-horizontal" role="search" method="POST" action="/detail/search">--}}
             <input id="_token" type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <div class="col-lg-2">
-                <button id="submit" type="submit" class="btn color">@lang('variables.search')</button>
-
-            </div>
             <div class="col-lg-10">
                 <div class="form-group">
                     <input id="query" name="query" type="text" class="form-control"
                            placeholder="@lang('variables.search')">
                 </div>
+            </div>
+            <div class="col-lg-2">
+                <button id="submit" type="submit" class="btn color">@lang('variables.search')</button>
+
             </div>
             {{--</form>--}}
 
@@ -28,31 +28,31 @@
     <div class="row">
 
             <div class="center">
-                <table class="table table-hover">
+                <table class="table table-hover" style="text-align: left !important;">
                     <caption class="color_pink title3">@lang('variables.details')</caption>
                     <thead>
-                    <tr>
-                        <th>@lang('variables.operations')</th>
-                        <th>@lang('variables.price')</th>
-                        <th>@lang('variables.name')</th>
-                        <th>@lang('variables.number')</th>
-
-                    </tr>
+                        <tr>
+                            <th>@lang('variables.number')</th>
+                            <th>@lang('variables.name')</th>
+                            <th>@lang('variables.price')</th>
+                            <th>@lang('variables.operations')</th>
+                        </tr>
                     </thead>
                     <tbody id="result">
                     @if(isset($details))
                         @foreach($details as $detail)
                             <tr>
+                                <th scope="row">{{$detail->id}}</th>
+                                <td>{{$detail->name}}</td>
+                                <td>{{$detail->price}}</td>
                                 <td>
                                     {{--<a href="/detail/{{$detail->id}}"> @lang('variables.show')</a>--}}
                                     <a href="/detail/{{$detail->id}}/edit">@lang('variables.edit')</a>
 
-                                        <a href="/detail/{{$detail->id}}/delete">@lang('variables.delete')</a>
+                                    <a href="/detail/{{$detail->id}}/delete">@lang('variables.delete')</a>
 
                                 </td>
-                                <td>{{$detail->price}}</td>
-                                <td>{{$detail->name}}</td>
-                                <th scope="row">{{$detail->id}}</th>
+
                             </tr>
                         @endforeach
                     </tbody>

@@ -32,7 +32,7 @@ class Product extends Model
     {
         return $this->hasMany('App\ProductOrderItem');
     }
-    public function materials()
+    public function productMaterials()
     {
         return $this->hasMany('App\ProductMaterial');
     }
